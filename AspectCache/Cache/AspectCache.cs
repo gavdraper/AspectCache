@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using PostSharp.Aspects;
 
-namespace EFCacheTest.Cache
+namespace AspectCache.Cache
 {
     [Serializable]
-    class CacheAspect : OnMethodBoundaryAspect
+    class AspectCache : OnMethodBoundaryAspect
     {
         private readonly string _keyPrefix;
         private readonly string _identifier;
@@ -14,7 +14,7 @@ namespace EFCacheTest.Cache
         private bool _found;
         private readonly ICache _cache;
 
-        public CacheAspect(string keyPrefix, string identifier, CacheFunction function, Type cache)
+        public AspectCache(string keyPrefix, string identifier, CacheFunction function, Type cache)
         {
             _keyPrefix = keyPrefix;
             _identifier = identifier;

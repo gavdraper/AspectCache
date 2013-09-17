@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EFCacheTest.Cache
+namespace AspectCache.Cache
 {
     public class RedisCache : ICache
     {

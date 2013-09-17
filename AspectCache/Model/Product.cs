@@ -1,4 +1,4 @@
-﻿namespace EFCacheTest.Model
+﻿namespace AspectCache.Model
 {
     public class Product
     {

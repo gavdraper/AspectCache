@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EFCacheTest.Cache
+namespace AspectCache.Cache
 {
     [Serializable]
     class DictionaryCache : ICache

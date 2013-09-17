@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using EFCacheTest.Data.Repository;
-using EFCacheTest.Model;
+using AspectCache.Data.Repository;
+using AspectCache.Model;
 
-namespace EFCacheTest
+namespace AspectCache
 {
     class Program
     {

@@ -54,7 +54,7 @@
     <Compile Include="Cache\ICache.cs" />
     <Compile Include="Cache\RedisCache.cs" />
     <Compile Include="Data\EFContext.cs" />
-    <Compile Include="Cache\CacheAspect.cs" />
+    <Compile Include="Cache\AspectCache.cs" />
     <Compile Include="Data\Repository\ProductRepository.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Program.cs" />

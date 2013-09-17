@@ -1,4 +1,4 @@
-﻿namespace EFCacheTest.Cache
+﻿namespace AspectCache.Cache
 {
     public interface ICache
     {

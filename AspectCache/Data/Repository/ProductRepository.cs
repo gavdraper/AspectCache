@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EFCacheTest.Cache;
-using EFCacheTest.Model;
+using AspectCache.Cache;
+using AspectCache.Model;
 
-namespace EFCacheTest.Data.Repository
+namespace AspectCache.Data.Repository
 {
     class ProductRepository 
     {
@@ -34,7 +34,7 @@ namespace EFCacheTest.Data.Repository
         }
 
 
-        [CacheAspect(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(DictionaryCache))]
+        [Cache.AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(DictionaryCache))]
         public Product Get(int id)
         {
             return _ctx.Products.FirstOrDefault(x => x.Id == id);
