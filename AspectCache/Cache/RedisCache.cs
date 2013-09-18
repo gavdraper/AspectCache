@@ -11,25 +11,31 @@ namespace AspectCache.Cache
         public bool GetItem(string key, out object item)
         {
             item = null;
-            var c = new ServiceStack.Redis.RedisClient("localhost", 6379);
-            if (c.Exists(key)==1)
-            {             
-                item = ByteArrayToObject(c.Get(key));
-                return true;
+            using (var c = new ServiceStack.Redis.RedisClient("localhost", 6379))
+            {
+                if (c.Exists(key) == 1)
+                {
+                    item = ByteArrayToObject(c.Get(key));
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         public void AddItem(string key, object item)
         {
-            var c = new ServiceStack.Redis.RedisClient("localhost", 6379);
-            c.Add(key, ObjectToByteArray(item));
+            using (var c = new ServiceStack.Redis.RedisClient("localhost", 6379))
+            {
+                c.Add(key, ObjectToByteArray(item));
+            }
         }
 
         public void InvalidateItem(string key)
         {
-            var c = new ServiceStack.Redis.RedisClient("localhost", 6379);
-            c.RemoveEntry(key);
+            using (var c = new ServiceStack.Redis.RedisClient("localhost", 6379))
+            {
+                c.RemoveEntry(key);
+            }
         }
 
         private byte[] ObjectToByteArray(Object obj)
