@@ -34,7 +34,7 @@ namespace AspectCache.Data.Repository
         }
 
 
-        [Cache.AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(DictionaryCache))]
+        [Cache.AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
         public Product Get(int id)
         {
             return _ctx.Products.FirstOrDefault(x => x.Id == id);
