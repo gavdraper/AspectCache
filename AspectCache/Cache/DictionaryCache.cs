@@ -6,7 +6,7 @@ namespace AspectCache.Cache
     [Serializable]
     class DictionaryCache : ICache
     {
-        private static readonly Dictionary<string,object>  _cache = new Dictionary<string, object>();
+        private static readonly Dictionary<string, object> _cache = new Dictionary<string, object>();
 
         public bool GetItem(string key, out object item)
         {
@@ -21,12 +21,20 @@ namespace AspectCache.Cache
 
         public void AddItem(string key, object item)
         {
-            _cache.Add(key, item);
+            lock (_cache)
+            {
+                if (!_cache.ContainsKey(key))
+                    _cache.Add(key, item);
+            }
         }
 
         public void InvalidateItem(string key)
         {
-            _cache.Remove(key);
+            lock (_cache)
+            {
+                if (_cache.ContainsKey(key))
+                    _cache.Remove(key);
+            }
         }
     }
 }
