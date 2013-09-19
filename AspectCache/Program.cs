@@ -45,6 +45,29 @@ namespace AspectCache
             got = repo.Get(all.FirstOrDefault().Id);
             Console.WriteLine("\t\tRetrieved {0} {1}", got.Id, got.Name);
 
+
+            Console.WriteLine("Requesting All");
+            var all2 = repo.GetAll();
+            Console.WriteLine("\t\tRetrieved ");
+
+
+            Console.WriteLine("Requesting All");
+             all2 = repo.GetAll();
+            Console.WriteLine("\t\tRetrieved ");
+
+            Console.WriteLine("Updating " + item.Id);
+            item.Name += " V3";
+            repo.AddOrUpdate(item);
+
+            Console.WriteLine("Requesting All");
+            all2 = repo.GetAll();
+            Console.WriteLine("\t\tRetrieved ");
+
+
+            Console.WriteLine("Requesting All");
+            all2 = repo.GetAll();
+            Console.WriteLine("\t\tRetrieved ");
+
             Console.ReadLine();
 
         }
