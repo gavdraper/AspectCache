@@ -30,7 +30,7 @@ namespace AspectCache.Data.Repository
             return savedProduct;
         }
 
-        [AspectCache(keyPrefix: "Product", identifier: "product.Id", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
+        [AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
         public void Delete(int id)
         {
             var product = Get(id);
