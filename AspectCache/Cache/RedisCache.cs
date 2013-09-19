@@ -57,9 +57,9 @@ namespace AspectCache.Cache
         public static object ByteArrayToObject(byte[] data)
         {
             object obj = null;
-            System.IO.Stream streamWrite = new System.IO.MemoryStream(data);
-            var binaryWrite = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            streamWrite.Seek(0, System.IO.SeekOrigin.Begin);
+            Stream streamWrite = new MemoryStream(data);
+            var binaryWrite = new BinaryFormatter();
+            streamWrite.Seek(0, SeekOrigin.Begin);
             obj = binaryWrite.Deserialize(streamWrite);
             return obj;
         }

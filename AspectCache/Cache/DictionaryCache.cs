@@ -6,7 +6,7 @@ namespace AspectCache.Cache
     [Serializable]
     class DictionaryCache : ICache
     {
-        private readonly Dictionary<string,object>  _cache = new Dictionary<string, object>();
+        private static readonly Dictionary<string,object>  _cache = new Dictionary<string, object>();
 
         public bool GetItem(string key, out object item)
         {
