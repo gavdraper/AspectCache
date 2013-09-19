@@ -14,7 +14,7 @@ namespace AspectCache
         private bool _found;
         private readonly ICache _cache;
 
-        public AspectCache(string keyPrefix, string identifier, CacheFunction function, Type cache)
+        public AspectCache(string keyPrefix, CacheFunction function, Type cache, string identifier = "")
         {
             _keyPrefix = keyPrefix;
             _identifier = identifier;
@@ -34,6 +34,7 @@ namespace AspectCache
         private string getIdValue(Dictionary<string, object> keys, string idField)
         {
             var idValue = "";
+            if (idField == "") return "";
             var path = idField.Split('.');
             var root = keys[path[0]];
             if (path.Length == 1)
@@ -55,6 +56,7 @@ namespace AspectCache
         {
             var methodParams = getParams(args);
             var idValue = getIdValue(methodParams, _identifier);
+            var conFore = Console.ForegroundColor;
 
             if (_function == CacheFunction.Retrieve || _function == CacheFunction.RetrieveOrAdd)
             {
@@ -65,12 +67,16 @@ namespace AspectCache
                     _found = true;
                     args.FlowBehavior = FlowBehavior.Return;
                     args.ReturnValue = item;
-                    Console.WriteLine("\tFound In Cache");
+                    Console.ForegroundColor = System.ConsoleColor.Green;
+                    Console.WriteLine("\t\tInCache");
+                    Console.ForegroundColor = conFore;
                 }
                 else
                 {
                     _found = false;
-                    Console.WriteLine("\tNot Found In Cache");
+                    Console.ForegroundColor = System.ConsoleColor.Yellow;
+                    Console.WriteLine("\t\tNot Cached");
+                    Console.ForegroundColor = conFore;
                     
                 }
 
@@ -80,7 +86,6 @@ namespace AspectCache
             //for this item
             else if (_function == CacheFunction.Invalidate)
             {
-                Console.WriteLine("\tRemoved From Cache");
                 _cache.InvalidateItem(_keyPrefix + idValue);
             }
 
@@ -93,14 +98,13 @@ namespace AspectCache
             if (!_found && _function == CacheFunction.RetrieveOrAdd && args.ReturnValue != null)
             {
                 _cache.AddItem(_keyPrefix + idValue, args.ReturnValue);
-                Console.WriteLine("\tAdded to cache");
             }
             //This is repeated in exit incase any items in method have retrieved and re added the item
             //to the cache. This guarenttes that the start and end of the method will have a clean cache
             //for this item
             else if ( _function == CacheFunction.Invalidate)
             {
-                Console.WriteLine("\tRemoved From Cache");
+
                 _cache.InvalidateItem(_keyPrefix + idValue);
             }
         }

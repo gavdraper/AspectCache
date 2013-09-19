@@ -9,11 +9,14 @@ namespace AspectCache.Data.Repository
     {
         readonly EFContext _ctx = new EFContext();
 
-        public IEnumerable<Product> GetAll()
+
+        [AspectCache(keyPrefix: "Products", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
+        public List<Product> GetAll()
         {
-            return _ctx.Products;
+            return _ctx.Products.ToList();
         }
 
+        [AspectCache(keyPrefix: "Products", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
         [AspectCache(keyPrefix: "Product", identifier: "product.Id", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
         public Product AddOrUpdate(Product product)
         {
@@ -30,6 +33,7 @@ namespace AspectCache.Data.Repository
             return savedProduct;
         }
 
+        [AspectCache(keyPrefix: "Products", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
         [AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
         public void Delete(int id)
         {
@@ -38,17 +42,27 @@ namespace AspectCache.Data.Repository
             _ctx.SaveChanges();
         }
 
+        [AspectCache(keyPrefix: "Products", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
+        [AspectCache(keyPrefix: "Product", identifier: "product.Id", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
+        public void Delete(Product product)
+        {
+            _ctx.Products.Remove(product);
+            _ctx.SaveChanges();
+        }
+        
         [AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
         public Product Get(int id)
         {
             return _ctx.Products.FirstOrDefault(x => x.Id == id);
         }
 
+
+        [AspectCache(keyPrefix: "Products", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
         public void Clear()
         {
             var products = GetAll();
             foreach (var p in products)
-                _ctx.Products.Remove(p);
+                Delete(p.Id);
             _ctx.SaveChanges();
         }
     }
