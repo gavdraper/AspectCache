@@ -26,7 +26,10 @@ namespace AspectCache.Cache
         {
             using (var c = new ServiceStack.Redis.RedisClient("localhost", 6379))
             {
-                c.Add(key, ObjectToByteArray(item));
+                if (c.Exists(key) == 0)
+                {
+                    c.Add(key, ObjectToByteArray(item));
+                }
             }
         }
 
@@ -34,7 +37,10 @@ namespace AspectCache.Cache
         {
             using (var c = new ServiceStack.Redis.RedisClient("localhost", 6379))
             {
-                c.RemoveEntry(key);
+                if (c.Exists(key) == 1)
+                {
+                    c.RemoveEntry(key);
+                }
             }
         }
 

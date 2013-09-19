@@ -14,18 +14,23 @@ namespace AspectCache.Data.Repository
             return _ctx.Products;
         }
 
-        public void AddOrUpdate(Product product)
+        [AspectCache(keyPrefix: "Product", identifier: "product.Id", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
+        public Product AddOrUpdate(Product product)
         {
+            var savedProduct = product;
             if (product.Id < 1)
                 _ctx.Products.Add(product);
             else
             {
                 var toEdit = Get(product.Id);
                 toEdit.Name = product.Name;
+                savedProduct = toEdit;
             }
             _ctx.SaveChanges();
+            return savedProduct;
         }
 
+        [AspectCache(keyPrefix: "Product", identifier: "product.Id", function: CacheFunction.Invalidate, cache: typeof(RedisCache))]
         public void Delete(int id)
         {
             var product = Get(id);
@@ -33,8 +38,7 @@ namespace AspectCache.Data.Repository
             _ctx.SaveChanges();
         }
 
-
-        [Cache.AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
+        [AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
         public Product Get(int id)
         {
             return _ctx.Products.FirstOrDefault(x => x.Id == id);
