@@ -5,7 +5,7 @@ using AspectCache.Model;
 
 namespace AspectCache.Data.Repository
 {
-    class ProductRepository 
+    public class ProductRepository 
     {
         readonly EFContext _ctx = new EFContext();
 

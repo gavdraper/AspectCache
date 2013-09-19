@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.20617.1 PREVIEW
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspectCache", "AspectCache\AspectCache.csproj", "{B4F41A18-3B87-44A4-A736-64382C5FCFBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspectCache.Sample", "AspectCache.Sample\AspectCache.Sample.csproj", "{E2BC51D8-9882-46D0-8630-6DF51D3C8612}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B4F41A18-3B87-44A4-A736-64382C5FCFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4F41A18-3B87-44A4-A736-64382C5FCFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4F41A18-3B87-44A4-A736-64382C5FCFBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2BC51D8-9882-46D0-8630-6DF51D3C8612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BC51D8-9882-46D0-8630-6DF51D3C8612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BC51D8-9882-46D0-8630-6DF51D3C8612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BC51D8-9882-46D0-8630-6DF51D3C8612}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
