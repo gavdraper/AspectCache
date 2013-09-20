@@ -4,7 +4,11 @@ Aspect cache allows you to add caching to existing repositories and services wit
   
 For example the followng Get method in a repository can have caching added to it just by adding the following attribute
 
-    [AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
+    [AspectCache(
+        keyPrefix: "Product", 
+        identifier: "id", 
+        function: CacheFunction.RetrieveOrAdd, 
+        cache: typeof(RedisCache))]
     public Product Get(int id)
     {
         return _ctx.Products.FirstOrDefault(x => x.Id == id);
@@ -19,11 +23,11 @@ You would need to create the RedisCache object and implement the ICache interfac
 
 A good first reference is the sample project included within the solution. It comes with basic examples of using Redis caching and a .Net dictionary cache. These can be swapped out by changing the caching attributes in the repository class to point to the cache you want to use.
 
-    [AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
+    [AspectCache(... cache: typeof(RedisCache))]
 
 or
 
-    [AspectCache(keyPrefix: "Product", identifier: "id", function: CacheFunction.RetrieveOrAdd, cache: typeof(DictionaryCache))]
+    [AspectCache(... cache: typeof(DictionaryCache))]
 ####File new project
 1. Reference the AspectCache assembly from your project.
 2. Create a cache class that inherits from AspectCache.Cache.ICache, alternativly start from one of the examples in the sample project DictionaryCache or RedisCache.
