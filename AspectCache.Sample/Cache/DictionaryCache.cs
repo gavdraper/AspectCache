@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using AspectCache.Cache;
 
-namespace AspectCache.Cache
+namespace AspectCache.Sample.Cache
 {
     [Serializable]
     class DictionaryCache : ICache

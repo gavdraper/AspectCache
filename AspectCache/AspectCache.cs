@@ -6,7 +6,7 @@ using AspectCache.Cache;
 namespace AspectCache
 {
     [Serializable]
-    class AspectCache : OnMethodBoundaryAspect
+    public class AspectCache : OnMethodBoundaryAspect
     {
         private readonly string _keyPrefix;
         private readonly string _identifier;

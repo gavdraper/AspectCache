@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AspectCache.Data.Repository;
-using AspectCache.Model;
+using AspectCache.Sample.Data.Repository;
+using AspectCache.Sample.Model;
 
 namespace AspectCache.Sample
 {

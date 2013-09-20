@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using AspectCache.Model;
+using AspectCache.Sample.Model;
 
-namespace AspectCache.Data
+namespace AspectCache.Sample.Data
 {
     public class EFContext : DbContext
     {

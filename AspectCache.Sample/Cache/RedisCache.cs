@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using AspectCache.Cache;
 
-namespace AspectCache.Cache
+namespace AspectCache.Sample.Cache
 {
     [Serializable]
     public class RedisCache : ICache

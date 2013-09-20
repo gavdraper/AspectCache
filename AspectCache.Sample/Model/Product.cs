@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AspectCache.Model
+namespace AspectCache.Sample.Model
 {
     [Serializable]
     public class Product

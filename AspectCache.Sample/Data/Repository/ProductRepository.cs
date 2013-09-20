@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AspectCache.Cache;
-using AspectCache.Model;
+using AspectCache.Sample.Model;
+using RedisCache = AspectCache.Sample.Cache.RedisCache;
 
-namespace AspectCache.Data.Repository
+namespace AspectCache.Sample.Data.Repository
 {
     public class ProductRepository 
     {
         readonly EFContext _ctx = new EFContext();
-
 
         [AspectCache(keyPrefix: "Products", function: CacheFunction.RetrieveOrAdd, cache: typeof(RedisCache))]
         public List<Product> GetAll()
