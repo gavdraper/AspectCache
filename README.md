@@ -2,7 +2,7 @@ AspectCache
 ===  
 Aspect cache allows you to add caching to existing repositories and services without having to plumb in boiletplate code to every method you want to add it to. It does this using Aspect Oriented Programming with [PostSharp](http://www.postsharp.net/).  
   
-For example the followng Get method in a repository can have caching added to it just by adding the following attribute
+For example to add caching to a Get and Update repository method you just need to add these attributes....
 
     [AspectCache(
         keyPrefix: "Product", 
@@ -13,13 +13,24 @@ For example the followng Get method in a repository can have caching added to it
     {
         return _ctx.Products.FirstOrDefault(x => x.Id == id);
     }    
+    
+    [AspectCache(
+        keyPrefix: "Product", 
+        identifier: "product.Id", 
+        function: CacheFunction.Invalidate, 
+        cache: typeof(RedisCache))]
+    public Product Update(Product product)
+    {
+        var toEdit = Get(product.Id);
+        toEdit.Name = product.Name;
+         _ctx.SaveChanges();
+        return toEdit;
+    }    
 You would need to create the RedisCache object and implement the ICache interface provided with AspectCache but that is all. The AspectCache solution provides non production ready examples of both a RedisCache and Dictionary implementation.
   
-### Requirements
-* PostSharp Visual Studio Extension Installed
-* PostSharp (Free) Express License Installed
-
 ### Getting Started
+
+In order to build and run a project that uses AspectCache you will need the Postsharp visual studio extension installed and a valid (free) PostSharp express license.
 
 A good first reference is the sample project included within the solution. It comes with basic examples of using Redis caching and a .Net dictionary cache. These can be swapped out by changing the caching attributes in the repository class to point to the cache you want to use.
 
@@ -30,9 +41,17 @@ or
     [AspectCache(... cache: typeof(DictionaryCache))]
 ####File new project
 1. Reference the AspectCache assembly from your project.
-2. Create a cache class that inherits from AspectCache.Cache.ICache, alternativly start from one of the examples in the sample project DictionaryCache or RedisCache.
+2. Create a cache class that inherits from AspectCache.Cache.ICache, alternativly start from one of the examples in the sample project DictionaryCache or RedisCache. ICache is a pretty simple interface to implement and requires only 3 methods
+
+        public interface ICache
+        {
+        bool GetItem(string key, out object item);
+        void AddItem(string key, object item);
+        void InvalidateItem(string key);
+        }
+
 3. Add the caching attributes to the methods you want to cache. 
-4. Done
+
 
 ### Cache Functions
 AspectCache currently has 3 different ways to use the cache
