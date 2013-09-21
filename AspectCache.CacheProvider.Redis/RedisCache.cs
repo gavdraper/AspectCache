@@ -3,12 +3,11 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using AspectCache.Cache;
 
-namespace AspectCache.Sample.Cache
+namespace AspectCache.CacheProvider.Redis
 {
     [Serializable]
     public class RedisCache : ICache
     {
-
         public bool GetItem(string key, out object item)
         {
             item = null;
@@ -64,6 +63,6 @@ namespace AspectCache.Sample.Cache
             obj = binaryWrite.Deserialize(streamWrite);
             return obj;
         }
-
     }
 }
+

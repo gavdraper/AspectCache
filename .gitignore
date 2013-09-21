@@ -2,6 +2,8 @@
 [Bb]in/
 [Oo]bj/
 
+!*.dll
+
 # mstest test results
 TestResults
 

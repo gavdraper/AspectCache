@@ -4,19 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2BC51D8-9882-46D0-8630-6DF51D3C8612}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{7415F5A5-F55B-4370-AF87-709822CC3F59}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AspectCache.Sample</RootNamespace>
-    <AssemblyName>AspectCache.Sample</AssemblyName>
+    <RootNamespace>AspectCache.CacheProvider.Dictionary</RootNamespace>
+    <AssemblyName>AspectCache.CacheProvider.Dictionary</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <DontImportPostSharp>True</DontImportPostSharp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <DontImportPostSharp>True</DontImportPostSharp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +25,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,17 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="PostSharp">
       <HintPath>..\packages\PostSharp.3.0.36\lib\net20\PostSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,34 +45,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\EFContext.cs" />
-    <Compile Include="Data\Repository\ProductRepository.cs" />
-    <Compile Include="Model\Product.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DictionaryCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequiresPostSharp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AspecCache.CacheProvider.Dictionary\AspectCache.CacheProvider.Dictionary.csproj">
-      <Project>{7415f5a5-f55b-4370-af87-709822cc3f59}</Project>
-      <Name>AspectCache.CacheProvider.Dictionary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AspectCache.CacheProvider.Redis\AspectCache.CacheProvider.Redis.csproj">
-      <Project>{56f272ec-7cb5-42f3-af7b-ef863e7dcfb2}</Project>
-      <Name>AspectCache.CacheProvider.Redis</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AspectCache\AspectCache.csproj">
       <Project>{b4f41a18-3b87-44a4-a736-64382c5fcfbf}</Project>
       <Name>AspectCache</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\PostSharp.3.0.36\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.3.0.36\tools\PostSharp.targets')" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\packages\PostSharp.3.0.36\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.3.0.36\tools\PostSharp.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

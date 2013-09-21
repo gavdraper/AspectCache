@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using AspectCache.Cache;
 
-namespace AspectCache.Sample.Cache
+namespace AspectCache.CacheProvider.Dictionary
 {
     [Serializable]
     class DictionaryCache : ICache
